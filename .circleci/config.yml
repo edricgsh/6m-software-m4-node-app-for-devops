@@ -35,20 +35,6 @@ jobs:
           image: huai99/education-space
       - docker/push:
           image: huai99/education-space
-  deploy:
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      - setup_remote_docker
-      - heroku/install
-      - checkout
-      - run:
-          name: Heroku Container Push
-          command: |
-            heroku container:login
-            heroku container:push web -a edison-su-devops
-            heroku container:release web -a edison-su-devops
-
 workflows:
   simple_workflow:
     jobs:
@@ -59,6 +45,3 @@ workflows:
       - publish:
           requires:
             - test
-      - deploy:
-          requires:
-            - publish
