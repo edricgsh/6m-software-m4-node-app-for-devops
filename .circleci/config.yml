@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.1
   docker: circleci/docker@2.1.4
-  heroku: circleci/heroku@2.0.0
 jobs:
   build:
     docker:
@@ -24,17 +23,6 @@ jobs:
       - run: |
           echo “Running tests...”
           npm run test
-
-  publish:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - docker/check
-      - docker/build:
-          image: huai99/education-space
-      - docker/push:
-          image: huai99/education-space
 workflows:
   simple_workflow:
     jobs:
@@ -42,6 +30,3 @@ workflows:
       - test:
           requires:
             - build
-      - publish:
-          requires:
-            - test
