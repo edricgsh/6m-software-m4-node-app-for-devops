@@ -14,7 +14,14 @@ jobs:
       - run: |
           echo "Installing dependencies..."
           npm install
-  
+
+  print:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - run: |
+          echo "Installing dependencies..."
+
   test:
     docker:
       - image: cimg/node:16.10
@@ -30,6 +37,7 @@ workflows:
   simple_workflow:
     jobs:
       - build
+      - print
       - test:
           requires:
-            - build 
+            - build
