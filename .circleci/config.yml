@@ -19,8 +19,9 @@ jobs:
     docker:
       - image: cimg/node:16.10
     steps:
-      - run: |
+      - run:
           echo "Installing dependencies..."
+          echo "Testing"
 
   test:
     docker:
