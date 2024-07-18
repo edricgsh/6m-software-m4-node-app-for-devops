@@ -35,6 +35,21 @@ jobs:
           image: huai99/education-space
       - docker/push:
           image: huai99/education-space
+  deploy:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - setup_remote_docker
+      - heroku/install
+      - checkout
+      - run:
+          name: Heroku Containaer Push
+          command: |
+            heroku container:login
+            heroku stack:set container -a edric-v1-su-devops
+            heroku container:push web -a edric-v1-su-devops
+            heroku container:release web -a edric-v1-su-devops
+
 
 workflows:
   simple_workflow:
@@ -46,3 +61,6 @@ workflows:
       - publish:
           requires:
             - test
+      - deploy:
+          requires:
+            - publish
