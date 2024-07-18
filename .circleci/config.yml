@@ -46,6 +46,7 @@ jobs:
           name: Heroku Container Push
           command: |
             heroku container:login
+            heroku stack:set container -a edric-v1-su-devops
             heroku container:push web -a edric-su-devops
             heroku container:release web -a edric-su-devops
 
