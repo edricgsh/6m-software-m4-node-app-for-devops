@@ -1,8 +1,7 @@
 version: 2.1
-
 orbs:
   node: circleci/node@5.0.1
-
+  docker: circleci/docker@2.1.4
 jobs:
   build:
     docker:
@@ -10,19 +9,10 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-        pkg-manager: npm
+          pkg-manager: npm
       - run: |
-          echo "Installing dependencies..."
+          echo Installing dependencies...”
           npm install
-
-  print:
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      - run:
-          echo "Installing dependencies..."
-          echo "Testing"
-
   test:
     docker:
       - image: cimg/node:16.10
@@ -31,14 +21,27 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: |
-          echo "Running tests..."
+          echo “Running tests...”
           npm run test
+
+  publish:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: huai99/education-space
+      - docker/push:
+          image: huai99/education-space
 
 workflows:
   simple_workflow:
     jobs:
       - build
-      - print
       - test:
           requires:
             - build
+      - publish:
+          requires:
+            - test
