@@ -25,7 +25,8 @@ jobs:
           echo “Running tests...”
           npm run test
   publish:
-    docker
+    docker:
+      - image: cimg/node:16.10
     steps:
       - setup_remote_docker
       - checkout
@@ -34,7 +35,6 @@ jobs:
           image: huai99/education-space
       - docker/push:
           image: huai99/education-space
-
 
 workflows:
   simple_workflow:
