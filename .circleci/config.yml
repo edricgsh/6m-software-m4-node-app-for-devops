@@ -25,7 +25,7 @@ jobs:
           echo “Running tests...”
           npm run test
   publish:
-    executor: docker/docker
+    docker
     steps:
       - setup_remote_docker
       - checkout
