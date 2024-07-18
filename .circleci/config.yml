@@ -36,10 +36,10 @@ jobs:
           name: Heroku Container Push
           command: |
             heroku stack:set container -a edric-v1-su-devops
-      - heroku/push-docker-image
+      - heroku/push-docker-image:
           app-name: edric-v1-su-devops
           process-types: web
-      - heroku/release-docker-image
+      - heroku/release-docker-image:
           app-name: edric-v1-su-devops
           process-types: web
 
