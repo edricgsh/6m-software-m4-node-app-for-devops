@@ -31,9 +31,9 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: edisonzsq/education-space
+          image: huai99/education-space
       - docker/push:
-          image: edisonzsq/education-space
+          image: huai99/education-space
   deploy:
     docker:
       - image: cimg/node:16.10
