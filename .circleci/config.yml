@@ -24,30 +24,6 @@ jobs:
       - run: |
           echo “Running tests...”
           npm run test
-  publish:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - docker/check
-      - docker/build:
-          image: huai99/education-space
-      - docker/push:
-          image: huai99/education-space
-  deploy:
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      - setup_remote_docker
-      - heroku/install
-      - checkout
-      - run:
-          name: Heroku Container Push
-          command: |
-            heroku container:login
-            heroku stack:set container -a edric-v1-su-devops
-            heroku container:push web -a edric-v1-su-devops
-            heroku container:release web -a edric-v1-su-devops
 
 workflows:
   simple_workflow:
@@ -56,9 +32,3 @@ workflows:
       - test:
           requires:
             - build
-      - publish:
-          requires:
-            - test
-      - deploy:
-          requires:
-            - publish
