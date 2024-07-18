@@ -24,6 +24,17 @@ jobs:
       - run: |
           echo “Running tests...”
           npm run test
+  publish:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: huai99/education-space
+      - docker/push:
+          image: huai99/education-space
+
 
 workflows:
   simple_workflow:
@@ -32,3 +43,6 @@ workflows:
       - test:
           requires:
             - build
+      - publish
+          requires:
+            - test
