@@ -12,8 +12,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: |
-          echo Installing dependencies...”
-          npm install
+          echo "Simulate build"
   test:
     docker:
       - image: cimg/node:16.10
