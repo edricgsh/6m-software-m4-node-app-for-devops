@@ -63,3 +63,15 @@ workflows:
       - deploy:
           requires:
             - publish
+  simple_workflow_v2:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - publish:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - publish
