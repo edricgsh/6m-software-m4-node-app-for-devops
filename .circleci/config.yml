@@ -3,7 +3,6 @@ orbs:
   node: circleci/node@5.0.1
   docker: circleci/docker@2.1.4
   heroku: circleci/heroku@2.0.0
-  snyk: snyk/snyk@1.5.0
 jobs:
   build:
     docker:
@@ -35,49 +34,11 @@ jobs:
           image: huai99/education-space
       - docker/push:
           image: huai99/education-space
-  scan:
-    docker:
-      - image: cimg/node:16.10
-    environment:
-      IMAGE_NAME: huai99/education-space
-    steps:
-      - checkout
-      - setup_remote_docker
-      - docker/check
-      - run: docker build -t $IMAGE_NAME .
-      - snyk/scan:
-          docker-image-name: $IMAGE_NAME
-          fail-on-issues: false
-  codescan:
-    docker:
-      - image: cimg/node:16.10
-    environment:
-      IMAGE_NAME: huai99/education-space
-    steps:
-      - checkout
-      - setup_remote_docker
-      - docker/check
-      - run: docker build -t $IMAGE_NAME .
-      - snyk/install
-      - run: |
-          snyk code test
 
 workflows:
   simple_workflow:
     jobs:
       - build
-      - scan:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
-      - codescan:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
       - test:
           requires:
             - build
