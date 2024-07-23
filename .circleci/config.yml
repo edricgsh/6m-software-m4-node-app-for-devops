@@ -51,6 +51,19 @@ jobs:
           docker-image-name: $IMAGE_NAME
           severity-threshold: high
           fail-on-issues: false
+  codescan:
+    docker:
+      - image: cimg/node:16.10
+    environment:
+      IMAGE_NAME: huai99/education-space
+    steps:
+      - checkout
+      - setup_remote_docker
+      - docker/check
+      - run: docker build -t $IMAGE_NAME .
+      - snyk/install
+      - run: |
+          snyk code test
 
 
 workflows:
@@ -64,6 +77,12 @@ workflows:
           requires:
             - test
       - scan:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+      - codescan:
           requires:
             - build
           filters:
