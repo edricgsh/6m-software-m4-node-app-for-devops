@@ -12,6 +12,7 @@ db.serialize(() => {
   db.run("INSERT INTO user (id, name) VALUES (2, 'Bob')");
 });
 
+
 app.get("/user", (req, res) => {
   const userId = req.query.id;
   // Vulnerable to SQL Injection
