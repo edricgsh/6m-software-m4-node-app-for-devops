@@ -10,7 +10,6 @@ Node application is lightweight and is easy to use as sample application for thi
 ### npm install
 
 
-
 The `npm install` is the first command you will use to install all dependencies specified in the `package.json` file [here](./package.json).
 
 ### npm run test
