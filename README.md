@@ -5,6 +5,25 @@
 
 Node application is lightweight and is easy to use as sample application for this DevOps module. Please read on to learn about the basic (Terminal) command to build, test and run a Node application.
 
+## Project Structure
+
+```
+.
+├── .circleci/          # CircleCI configuration
+│   └── config.yml      # CircleCI pipeline configuration
+├── .dccache            # Dependency cache file
+├── .dockerignore       # Files to exclude from Docker builds
+├── .env                # Environment variables for local development
+├── .gitignore          # Files to exclude from git
+├── Dockerfile          # Docker build instructions
+├── README.md           # Project documentation
+├── controller.js       # Application controller logic
+├── controller.test.js  # Tests for the controller
+├── index.js            # Main application entry point
+├── package-lock.json   # Dependency lock file
+└── package.json        # Project metadata and dependencies
+```
+
 ## Commands
 
 ### npm install
@@ -32,4 +51,3 @@ The `npm run start` command will start the application. By default, it will use 
 ```sh
 Listening to port <port number>
 ```
-
