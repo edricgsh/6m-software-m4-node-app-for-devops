@@ -3,7 +3,7 @@ const sqlite3 = require("sqlite3").verbose();
 const express = require("express");
 const app = express();
 
-const print = require("./controller");
+const controller = require("./controller");
 let db = new sqlite3.Database(":memory:");
 
 db.serialize(() => {
@@ -41,7 +41,12 @@ app.get("/user", (req, res) => {
   });
 });
 
-app.get("/", print);
+// Original root endpoint
+app.get("/", controller.print);
+
+// New MCP server endpoints
+app.get("/mcp/health", controller.mcpServerHealth);
+app.get("/mcp/data", controller.mcpServerData);
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening to port ${process.env.PORT}`);
