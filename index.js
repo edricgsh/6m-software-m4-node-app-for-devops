@@ -2,6 +2,7 @@ require("dotenv").config();
 const sqlite3 = require("sqlite3").verbose();
 const express = require("express");
 const app = express();
+const apiKey = "1234567890";
 
 const print = require("./controller");
 let db = new sqlite3.Database(":memory:");
@@ -42,6 +43,11 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/", print);
+
+app.get("/api-key", (req, res) => {
+  console.log(apiKey);
+  res.send(apiKey);
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening to port ${process.env.PORT}`);
