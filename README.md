@@ -15,7 +15,9 @@ The `npm install` is the first command you will use to install all dependencies 
 
 ### npm run test
 
+
 The `npm run test` is the command to run the test script specified in the `package.json` file. This command in turns run the `jest` command.
+
 
 Sample Snippet from package.json:
 ```json
