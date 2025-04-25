@@ -78,13 +78,7 @@ workflows:
       - scan:
           requires:
             - build
-          filters:
-            branches:
-              only: main
       - codescan:
           requires:
             - build
-          filters:
-            branches:
-              only: main
           
