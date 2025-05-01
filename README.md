@@ -9,11 +9,9 @@ Node application is lightweight and is easy to use as sample application for thi
 
 ### npm install
 
-
-
 The `npm install` is the first command you will use to install all dependencies specified in the `package.json` file [here](./package.json).
 
-### npm run test
+### npm run test (with snyk)
 
 The `npm run test` is the command to run the test script specified in the `package.json` file. This command in turns run the `jest` command.
 
