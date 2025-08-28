@@ -64,7 +64,6 @@ jobs:
       - snyk/install
       - run: |
           snyk code test
-
 workflows:
   simple_workflow:
     jobs:
@@ -72,9 +71,13 @@ workflows:
       - test:
           requires:
             - build
-      - publish:
+      - approval:
+          type: approval
           requires:
             - test
+      - publish:
+          requires:
+            - approval
       - scan:
           requires:
             - build
